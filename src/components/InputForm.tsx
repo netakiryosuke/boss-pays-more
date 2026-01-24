@@ -11,19 +11,22 @@ export default function InputForm() {
     return (
         <div className="flex flex-col gap-4">
             <InputField
+                label="属性"
                 value={position}
                 setValue={setPosition}
-                placeholder="属性を入力してください"
+                placeholder="例：部長"
             />
             <InputField
+                label="支払いの重み"
                 value={weight}
                 setValue={setWeight}
-                placeholder="支払いの重みを入力してください"
+                placeholder="例：70"
             />
             <InputField
+                label="人数"
                 value={count}
                 setValue={setCount}
-                placeholder="人数を入力してください"
+                placeholder="例：3"
             />
         </div>
     );
