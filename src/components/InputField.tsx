@@ -1,5 +1,7 @@
 "use client";
 
+import { useId } from "react";
+
 interface Props {
     label: string;
     value: string;
@@ -15,12 +17,15 @@ export default function InputField({
     placeholder,
     type
 }: Props) {
+    const id = useId();
+
     return (
         <div>
-            <label className="text-sm font-medium">
+            <label htmlFor={id} className="text-sm font-medium">
                 {label}
             </label>
             <input
+                id={id}
                 type={type ?? "text"}
                 value={value}
                 onChange={e => setValue(e.target.value)}
