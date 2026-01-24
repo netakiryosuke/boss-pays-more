@@ -9,7 +9,7 @@ export default function InputForm() {
     const [count, setCount] = useState<string>("");
 
     return (
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col gap-4">
             <InputField
                 value={position}
                 setValue={setPosition}
