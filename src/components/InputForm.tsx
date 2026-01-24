@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import InputField from "./InputField";
 
 export default function InputForm() {
     const [position, setPosition] = useState<string>("");
@@ -9,27 +10,21 @@ export default function InputForm() {
 
     return (
         <div className="flex flex-col justify-center">
-            <input
-                type="text"
+            <InputField
                 value={position}
-                onChange={e => setPosition(e.target.value)}
+                setValue={setPosition}
                 placeholder="属性を入力してください"
-                className="w-auto border rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </input>
-            <input
-                type="text"
+            />
+            <InputField
                 value={weight}
-                onChange={e => setWeight(e.target.value)}
+                setValue={setWeight}
                 placeholder="支払いの重みを入力してください"
-                className="w-auto border rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </input>
-            <input
-                type="text"
+            />
+            <InputField
                 value={count}
-                onChange={e => setCount(e.target.value)}
+                setValue={setCount}
                 placeholder="人数を入力してください"
-                className="w-auto border rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </input>
+            />
         </div>
     );
 }
