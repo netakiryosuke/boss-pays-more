@@ -5,13 +5,15 @@ interface Props {
     value: string;
     setValue: (value: string) => void;
     placeholder: string;
+    type?: string;
 }
 
 export default function InputField({
     label,
     value,
     setValue,
-    placeholder
+    placeholder,
+    type
 }: Props) {
     return (
         <div>
@@ -19,7 +21,7 @@ export default function InputField({
                 {label}
             </label>
             <input
-                type="text"
+                type={type ?? "text"}
                 value={value}
                 onChange={e => setValue(e.target.value)}
                 placeholder={placeholder}
