@@ -2,6 +2,7 @@
 
 import AttributeInputGroup from "./AttributeInputGroup";
 import useAttributesForm from "@/hooks/useAttributesForm";
+import CalculateButton from "./CalculateButton";
 
 export default function InputForm() {
     const {
@@ -24,6 +25,7 @@ export default function InputForm() {
                     />
                 )
             })}
+            <CalculateButton />
         </div>
     );
 }
