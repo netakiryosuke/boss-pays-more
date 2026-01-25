@@ -6,6 +6,7 @@ import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/lib/calculateSplit";
 import { Result } from "@/types/result";
 import InputField from "./InputField";
+import IncreaseAttributeButton from "./IncreaseAttributeButton";
 
 interface Props {
     results: Result[];
@@ -22,7 +23,8 @@ export default function InputForm({
         attributes,
         updatePosition,
         updateWeight,
-        updateCount
+        updateCount,
+        addAttribute
     } = useAttributesForm();
 
     const handleCalculate = () => {
@@ -50,6 +52,9 @@ export default function InputForm({
                     />
                 )
             })}
+            <IncreaseAttributeButton
+                onClick={addAttribute}
+            />
             <CalculateButton
                 onClick={handleCalculate}
             />
