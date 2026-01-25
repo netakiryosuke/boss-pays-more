@@ -1,9 +1,5 @@
 import { AttributeInput } from "@/types/attribute";
-
-interface Result {
-    position: string;
-    payAmount: number;
-}
+import { Result } from "@/types/result";
 
 export default function calculateSplit(
     attributes: AttributeInput[],
