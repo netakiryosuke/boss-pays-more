@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AttributeInput } from "@/types/attribute";
 
 export default function useAttributesForm() {
+    const [totalAmount, setTotalAmount] = useState("");
     const [attributes, setAttributes] = useState<AttributeInput[]>([
         { position: "", weight: "", count: "" }
     ]);
@@ -33,6 +34,8 @@ export default function useAttributesForm() {
     };
 
     return {
+        totalAmount,
+        setTotalAmount,
         attributes,
         updatePosition,
         updateWeight,
