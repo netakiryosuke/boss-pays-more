@@ -38,7 +38,7 @@ export default function InputForm({
         if (!ok) return;
 
         removeAttribute(index);
-    }
+    };
 
     return (
         <div>
