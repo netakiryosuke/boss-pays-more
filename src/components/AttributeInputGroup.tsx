@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import InputField from "./InputField";
+import { AttributeInput } from "@/types/attribute";
 
-export default function AttributeInputGroup() {
+interface Props {
+    attributeInput: AttributeInput;
+}
+
+export default function AttributeInputGroup({ attributeInput } : Props) {
     const [position, setPosition] = useState<string>("");
     const [weight, setWeight] = useState<string>("");
     const [count, setCount] = useState<string>("");
