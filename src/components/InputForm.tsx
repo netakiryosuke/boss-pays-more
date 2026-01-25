@@ -17,6 +17,8 @@ export default function InputForm({
     setResults
 }: Props) {
     const {
+        totalAmount,
+        setTotalAmount,
         attributes,
         updatePosition,
         updateWeight,
@@ -24,8 +26,7 @@ export default function InputForm({
     } = useAttributesForm();
 
     const handleCalculate = () => {
-        // TODO: totalAmountをフォームから取得するようにする
-        const newResults = calculateSplit(attributes, 100);
+        const newResults = calculateSplit(attributes, Number(totalAmount));
         setResults(newResults);
     };
 
@@ -33,8 +34,8 @@ export default function InputForm({
         <div>
             <InputField 
                 label="合計金額"
-                value="" 
-                onChange={() => {}} 
+                value={totalAmount} 
+                onChange={setTotalAmount} 
                 placeholder="例：10000" 
                 type="number"
             />
