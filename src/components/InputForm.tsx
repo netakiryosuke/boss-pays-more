@@ -14,6 +14,7 @@ export default function InputForm() {
     } = useAttributesForm();
 
     const handleCalculate = () => {
+        // TODO: totalAmountをフォームから取得するようにする
         const results = calculateSplit(attributes, 100);
     };
 
