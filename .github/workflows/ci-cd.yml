@@ -9,6 +9,11 @@ on:
       - "*"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   build:
 
@@ -83,7 +88,7 @@ jobs:
             const existingLintComment = existingComments.find(
               (comment) => comment.body && comment.body.includes(marker)
             );
-            
+
             if (existingLintComment) {
               // 既存コメントを更新
               await github.rest.issues.updateComment({
