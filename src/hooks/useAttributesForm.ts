@@ -11,6 +11,10 @@ export default function useAttributesForm() {
         setAttributes(prev => [...prev, { position: "", weight: "", count: "" }]);
     };
 
+    const removeAttribute = (index: number) => {
+        setAttributes(prev => prev.filter((_, i) => i !== index));
+    };
+
     const updateAttribute = (
         index: number,
         field: keyof AttributeInput,
@@ -44,6 +48,7 @@ export default function useAttributesForm() {
         updatePosition,
         updateWeight,
         updateCount,
-        addAttribute
+        addAttribute,
+        removeAttribute
     };
 }
