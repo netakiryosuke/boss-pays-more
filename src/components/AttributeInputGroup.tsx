@@ -15,7 +15,7 @@ export default function AttributeInputGroup({
     updatePosition,
     updateWeight,
     updateCount
-} : Props) {
+}: Props) {
 
     return (
         <div className="flex flex-col gap-4">
