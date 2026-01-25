@@ -12,10 +12,7 @@ export default function useAttributesForm() {
     };
 
     const removeAttribute = (index: number) => {
-        const ok = window.confirm("本当にこの参加者を削除しますか？");
-        if (ok) {
-            setAttributes(prev => prev.filter((_, i) => i !== index));
-        }
+        setAttributes(prev => prev.filter((_, i) => i !== index));
     };
 
     const updateAttribute = (
