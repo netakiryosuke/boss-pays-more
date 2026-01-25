@@ -24,7 +24,8 @@ export default function InputForm({
         updatePosition,
         updateWeight,
         updateCount,
-        addAttribute
+        addAttribute,
+        removeAttribute
     } = useAttributesForm();
 
     const handleCalculate = () => {
@@ -49,6 +50,7 @@ export default function InputForm({
                         updatePosition={position => updatePosition(index, position)}
                         updateWeight={weight => updateWeight(index, weight)}
                         updateCount={count => updateCount(index, count)}
+                        onRemove={() => removeAttribute(index)}
                     />
                 )
             })}

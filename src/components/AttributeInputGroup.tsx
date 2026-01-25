@@ -8,13 +8,15 @@ interface Props {
     updatePosition: (position: string) => void;
     updateWeight: (weight: string) => void;
     updateCount: (count: string) => void;
+    onRemove: () => void;
 }
 
 export default function AttributeInputGroup({
     attribute,
     updatePosition,
     updateWeight,
-    updateCount
+    updateCount,
+    onRemove
 }: Props) {
 
     return (
