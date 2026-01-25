@@ -69,6 +69,39 @@ jobs:
               body
             });
 
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const marker = '### ESLint Results';
+
+            // 既存のESLint結果コメントを検索
+            const existingComments = await github.paginate(
+              github.rest.issues.listComments,
+              { owner, repo, issue_number }
+            );
+
+            const existingLintComment = existingComments.find(
+              (comment) => comment.body && comment.body.includes(marker)
+            );
+            
+            if (existingLintComment) {
+              // 既存コメントを更新
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existingLintComment.id,
+                body,
+              });
+            } else {
+              // なければ新規作成
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
+
       - name: Type check
         run: npm run typecheck
 
