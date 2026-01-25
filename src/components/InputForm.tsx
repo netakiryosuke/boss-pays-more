@@ -11,30 +11,30 @@ export default function InputForm() {
 
     const updatePosition = (index: number, position: string) => {
         setAttributes(prev =>
-            prev.map((attributeInput, i) =>
+            prev.map((attribute, i) =>
                 i === index
-                    ? { ...attributeInput, position }
-                    : attributeInput
+                    ? { ...attribute, position }
+                    : attribute
             )
         );
     };
 
     const updateWeight = (index: number, weight: string) => {
         setAttributes(prev =>
-            prev.map((attributeInput, i) =>
+            prev.map((attribute, i) =>
                 i === index
-                    ? { ...attributeInput, weight }
-                    : attributeInput
+                    ? { ...attribute, weight }
+                    : attribute
             )
         );
     };
 
     const updateCount = (index: number, count: string) => {
         setAttributes(prev =>
-            prev.map((attributeInput, i) =>
+            prev.map((attribute, i) =>
                 i === index
-                    ? { ...attributeInput, count }
-                    : attributeInput
+                    ? { ...attribute, count }
+                    : attribute
             )
         );
     };
@@ -42,11 +42,11 @@ export default function InputForm() {
 
     return (
         <div>
-            {attributes.map((attributeInput, index) => {
+            {attributes.map((attribute, index) => {
                 return (
                     <AttributeInputGroup
                         key={index}
-                        attributeInput={attributeInput}
+                        attribute={attribute}
                         updatePosition={position => updatePosition(index, position)}
                         updateWeight={weight => updateWeight(index, weight)}
                         updateCount={count => updateCount(index, count)}
