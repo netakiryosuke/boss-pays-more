@@ -24,8 +24,8 @@ export default function InputForm({
 
     const handleCalculate = () => {
         // TODO: totalAmountをフォームから取得するようにする
-        const results = calculateSplit(attributes, 100);
-        setResults(results);
+        const newResults = calculateSplit(attributes, 100);
+        setResults(newResults);
     };
 
     return (
