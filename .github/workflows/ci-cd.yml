@@ -49,15 +49,18 @@ jobs:
               lintResult = 'エラーや警告は見つかりませんでした。';
             }
 
-            const body = `### ESLint Results
-<details>
-<summary>詳細を表示</summary>
-
-\`\`\`
-${lintResult}
-\`\`\`
-
-</details>`;
+            const body = [
+              '### ESLint Results',
+              '',
+              '<details>',
+              '<summary>詳細を表示</summary>',
+              '',
+              '```',
+              lintResult,
+              '```',
+              '',
+              '</details>',
+            ].join('\n');
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
