@@ -6,7 +6,7 @@ import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/lib/calculateSplit";
 import { Result } from "@/types/result";
 import InputField from "./InputField";
-import IncreaseAttributeButton from "./IncreaseAttributeButton";
+import AddAttributeButton from "./AddAttributeButton";
 
 interface Props {
     results: Result[];
@@ -52,7 +52,7 @@ export default function InputForm({
                     />
                 )
             })}
-            <IncreaseAttributeButton
+            <AddAttributeButton
                 onClick={addAttribute}
             />
             <CalculateButton
