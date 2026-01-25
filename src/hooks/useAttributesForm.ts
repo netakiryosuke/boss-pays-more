@@ -7,6 +7,10 @@ export default function useAttributesForm() {
         { position: "", weight: "", count: "" }
     ]);
 
+    const addAttribute = () => {
+        setAttributes(prev => [...prev, { position: "", weight: "", count: "" }]);
+    };
+
     const updateAttribute = (
         index: number,
         field: keyof AttributeInput,
@@ -39,6 +43,7 @@ export default function useAttributesForm() {
         attributes,
         updatePosition,
         updateWeight,
-        updateCount
+        updateCount,
+        addAttribute
     };
 }
