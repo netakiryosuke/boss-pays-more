@@ -3,6 +3,7 @@
 import AttributeInputGroup from "./AttributeInputGroup";
 import useAttributesForm from "@/hooks/useAttributesForm";
 import CalculateButton from "./CalculateButton";
+import calculateSplit from "@/lib/calculateSplit";
 
 export default function InputForm() {
     const {
@@ -11,6 +12,10 @@ export default function InputForm() {
         updateWeight,
         updateCount
     } = useAttributesForm();
+
+    const handleCalculate = () => {
+        const results = calculateSplit(attributes, 100);
+    };
 
     return (
         <div>
@@ -25,7 +30,9 @@ export default function InputForm() {
                     />
                 )
             })}
-            <CalculateButton />
+            <CalculateButton
+                onClick={handleCalculate}
+            />
         </div>
     );
 }
