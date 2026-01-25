@@ -24,7 +24,8 @@ export default function InputForm({
         updatePosition,
         updateWeight,
         updateCount,
-        addAttribute
+        addAttribute,
+        removeAttribute
     } = useAttributesForm();
 
     const handleCalculate = () => {
@@ -32,13 +33,20 @@ export default function InputForm({
         setResults(newResults);
     };
 
+    const handleRemoveAttribute = (index: number) => {
+        const ok = window.confirm("本当にこの参加者を削除しますか？");
+        if (!ok) return;
+
+        removeAttribute(index);
+    };
+
     return (
         <div>
-            <InputField 
+            <InputField
                 label="合計金額"
-                value={totalAmount} 
-                onChange={setTotalAmount} 
-                placeholder="例：10000" 
+                value={totalAmount}
+                onChange={setTotalAmount}
+                placeholder="例：10000"
                 type="number"
             />
             {attributes.map((attribute, index) => {
@@ -49,6 +57,7 @@ export default function InputForm({
                         updatePosition={position => updatePosition(index, position)}
                         updateWeight={weight => updateWeight(index, weight)}
                         updateCount={count => updateCount(index, count)}
+                        onRemove={() => handleRemoveAttribute(index)}
                     />
                 )
             })}

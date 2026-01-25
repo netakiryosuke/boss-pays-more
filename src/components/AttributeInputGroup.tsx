@@ -8,13 +8,15 @@ interface Props {
     updatePosition: (position: string) => void;
     updateWeight: (weight: string) => void;
     updateCount: (count: string) => void;
+    onRemove: () => void;
 }
 
 export default function AttributeInputGroup({
     attribute,
     updatePosition,
     updateWeight,
-    updateCount
+    updateCount,
+    onRemove
 }: Props) {
 
     return (
@@ -39,6 +41,14 @@ export default function AttributeInputGroup({
                 placeholder="例：3"
                 type="number"
             />
+            <button
+                type="button"
+                onClick={onRemove}
+                className="text-sm bg-red-500 text-white 
+                        hover:bg-red-600 transition cursor-pointer"
+            >
+                参加者を削除
+            </button>
         </div>
     );
 }
