@@ -5,6 +5,7 @@ import useAttributesForm from "@/hooks/useAttributesForm";
 import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/lib/calculateSplit";
 import { Result } from "@/types/result";
+import InputField from "./InputField";
 
 interface Props {
     results: Result[];
@@ -30,6 +31,13 @@ export default function InputForm({
 
     return (
         <div>
+            <InputField 
+                label="合計金額"
+                value="" 
+                onChange={() => {}} 
+                placeholder="例：10000" 
+                type="number"
+            />
             {attributes.map((attribute, index) => {
                 return (
                     <AttributeInputGroup
