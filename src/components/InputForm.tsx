@@ -4,8 +4,17 @@ import AttributeInputGroup from "./AttributeInputGroup";
 import useAttributesForm from "@/hooks/useAttributesForm";
 import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/lib/calculateSplit";
+import { Result } from "@/types/result";
 
-export default function InputForm() {
+interface Props {
+    results: Result[];
+    setResults: (results: Result[]) => void;
+}
+
+export default function InputForm({
+    results,
+    setResults
+}: Props) {
     const {
         attributes,
         updatePosition,
@@ -16,6 +25,7 @@ export default function InputForm() {
     const handleCalculate = () => {
         // TODO: totalAmountをフォームから取得するようにする
         const results = calculateSplit(attributes, 100);
+        setResults(results);
     };
 
     return (
