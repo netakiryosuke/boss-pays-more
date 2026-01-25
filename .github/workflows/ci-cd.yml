@@ -27,7 +27,44 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        id: lint
+        run: |
+          npm run lint > lint-result.txt 2>&1
+
+      - name: Comment lint result to PR
+        if: github.event_name == 'pull_request' && steps.lint.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            let lintResult = '';
+            if (fs.existsSync('lint-result.txt')) {
+              lintResult = fs.readFileSync('lint-result.txt', 'utf8').trim();
+            }
+
+            // 結果が空の場合
+            if (!lintResult) {
+              lintResult = 'エラーや警告は見つかりませんでした。';
+            }
+
+            const body = `### ESLint Results
+<details>
+<summary>詳細を表示</summary>
+
+\`\`\`
+${lintResult}
+\`\`\`
+
+</details>`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
 
       - name: Type check
         run: npm run typecheck
