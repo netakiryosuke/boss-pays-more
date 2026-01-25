@@ -6,34 +6,30 @@ export default function useAttributesForm() {
         { position: "", weight: "", count: "" }
     ]);
 
-    const updatePosition = (index: number, position: string) => {
+    const updateAttribute = (
+        index: number,
+        field: keyof AttributeInput,
+        value: string
+    ) => {
         setAttributes(prev =>
             prev.map((attribute, i) =>
                 i === index
-                    ? { ...attribute, position }
+                    ? { ...attribute, [field]: value }
                     : attribute
             )
         );
+    };
+
+    const updatePosition = (index: number, position: string) => {
+        updateAttribute(index, "position", position);
     };
 
     const updateWeight = (index: number, weight: string) => {
-        setAttributes(prev =>
-            prev.map((attribute, i) =>
-                i === index
-                    ? { ...attribute, weight }
-                    : attribute
-            )
-        );
+        updateAttribute(index, "weight", weight);
     };
 
     const updateCount = (index: number, count: string) => {
-        setAttributes(prev =>
-            prev.map((attribute, i) =>
-                i === index
-                    ? { ...attribute, count }
-                    : attribute
-            )
-        );
+        updateAttribute(index, "count", count);
     };
 
     return {
