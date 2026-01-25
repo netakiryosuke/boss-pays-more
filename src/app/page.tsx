@@ -1,3 +1,5 @@
+"use client";
+
 import InputForm from "@/components/InputForm";
 import { Result } from "@/types/result";
 import { useState } from "react";
