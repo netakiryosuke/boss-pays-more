@@ -4,7 +4,7 @@ import { useId } from "react";
 
 interface Props {
     label: string;
-    value: string;
+    value: string | number;
     setValue: (value: string) => void;
     placeholder: string;
     type?: string;

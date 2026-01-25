@@ -9,6 +9,37 @@ export default function InputForm() {
         { position: "", weight: 0, count: 0 }
     ]);
 
+    const updatePosition = (index: number, position: string) => {
+        setAttributes(prev =>
+            prev.map((attributeInput, i) =>
+                i === index
+                    ? { ...attributeInput, position }
+                    : attributeInput
+            )
+        );
+    };
+
+    const updateWeight = (index: number, weight: number) => {
+        setAttributes(prev =>
+            prev.map((attributeInput, i) =>
+                i === index
+                    ? { ...attributeInput, weight }
+                    : attributeInput
+            )
+        );
+    };
+
+    const updateCount = (index: number, count: number) => {
+        setAttributes(prev =>
+            prev.map((attributeInput, i) =>
+                i === index
+                    ? { ...attributeInput, count }
+                    : attributeInput
+            )
+        );
+    };
+
+
     return (
         <div>
             {attributes.map((attributeInput, index) => {
@@ -16,6 +47,9 @@ export default function InputForm() {
                     <AttributeInputGroup
                         key={index}
                         attributeInput={attributeInput}
+                        updatePosition={position => updatePosition(index, position)}
+                        updateWeight={weight => updateWeight(index, weight)}
+                        updateCount={count => updateCount(index, count)}
                     />
                 )
             })}
