@@ -5,7 +5,7 @@ import { useId } from "react";
 interface Props {
     label: string;
     value: string;
-    setValue: (value: string) => void;
+    onChange: (value: string) => void;
     placeholder: string;
     type?: string;
 }
@@ -13,7 +13,7 @@ interface Props {
 export default function InputField({
     label,
     value,
-    setValue,
+    onChange,
     placeholder,
     type
 }: Props) {
@@ -28,7 +28,7 @@ export default function InputField({
                 id={id}
                 type={type ?? "text"}
                 value={value}
-                onChange={e => setValue(e.target.value)}
+                onChange={e => onChange(e.target.value)}
                 placeholder={placeholder}
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-base 
                        placeholder:text-gray-400 
