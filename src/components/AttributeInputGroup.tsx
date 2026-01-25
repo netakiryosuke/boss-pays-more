@@ -6,8 +6,8 @@ import { AttributeInput } from "@/types/attribute";
 interface Props {
     attributeInput: AttributeInput;
     updatePosition: (position: string) => void;
-    updateWeight: (weight: number) => void;
-    updateCount: (count: number) => void;
+    updateWeight: (weight: string) => void;
+    updateCount: (count: string) => void;
 }
 
 export default function AttributeInputGroup({
@@ -28,14 +28,14 @@ export default function AttributeInputGroup({
             <InputField
                 label="支払いの重み"
                 value={attributeInput.weight}
-                setValue={value => updateWeight(Number(value))}
+                setValue={updateWeight}
                 placeholder="例：70"
                 type="number"
             />
             <InputField
                 label="人数"
                 value={attributeInput.count}
-                setValue={value => updateCount(Number(value))}
+                setValue={updateCount}
                 placeholder="例：3"
                 type="number"
             />

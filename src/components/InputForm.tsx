@@ -6,7 +6,7 @@ import { AttributeInput } from "@/types/attribute";
 
 export default function InputForm() {
     const [attributes, setAttributes] = useState<AttributeInput[]>([
-        { position: "", weight: 0, count: 0 }
+        { position: "", weight: "", count: "" }
     ]);
 
     const updatePosition = (index: number, position: string) => {
@@ -19,7 +19,7 @@ export default function InputForm() {
         );
     };
 
-    const updateWeight = (index: number, weight: number) => {
+    const updateWeight = (index: number, weight: string) => {
         setAttributes(prev =>
             prev.map((attributeInput, i) =>
                 i === index
@@ -29,7 +29,7 @@ export default function InputForm() {
         );
     };
 
-    const updateCount = (index: number, count: number) => {
+    const updateCount = (index: number, count: string) => {
         setAttributes(prev =>
             prev.map((attributeInput, i) =>
                 i === index

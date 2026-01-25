@@ -1,5 +1,5 @@
 export interface AttributeInput {
     position: string;
-    weight: number;
-    count: number;
+    weight: string;
+    count: string;
 }
