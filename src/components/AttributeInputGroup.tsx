@@ -20,35 +20,40 @@ export default function AttributeInputGroup({
 }: Props) {
 
     return (
-        <div className="flex flex-col gap-4">
-            <InputField
-                label="属性"
-                value={attribute.position}
-                onChange={updatePosition}
-                placeholder="例：部長"
-            />
-            <InputField
-                label="支払いの重み"
-                value={attribute.weight}
-                onChange={updateWeight}
-                placeholder="例：70"
-                type="number"
-            />
-            <InputField
-                label="人数"
-                value={attribute.count}
-                onChange={updateCount}
-                placeholder="例：3"
-                type="number"
-            />
-            <button
-                type="button"
-                onClick={onRemove}
-                className="text-sm bg-red-500 text-white 
-                        hover:bg-red-600 transition cursor-pointer"
-            >
-                参加者を削除
-            </button>
+        <div className="p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+            <div className="space-y-4">
+                <InputField
+                    label="属性"
+                    value={attribute.position}
+                    onChange={updatePosition}
+                    placeholder="例：部長"
+                />
+                <div className="grid grid-cols-2 gap-4">
+                    <InputField
+                        label="支払いの重み"
+                        value={attribute.weight}
+                        onChange={updateWeight}
+                        placeholder="例：2（1なら等分、2なら2倍支払う）"
+                        type="number"
+                    />
+                    <InputField
+                        label="人数"
+                        value={attribute.count}
+                        onChange={updateCount}
+                        placeholder="例：3"
+                        type="number"
+                    />
+                </div>
+                <button
+                    type="button"
+                    onClick={onRemove}
+                    className="w-full py-2 px-4 text-sm font-medium text-red-600 bg-red-50 rounded-lg
+                            hover:bg-red-100 transition-colors duration-200 cursor-pointer
+                            border border-red-200 hover:border-red-300"
+                >
+                    参加者を削除
+                </button>
+            </div>
         </div>
     );
 }

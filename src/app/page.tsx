@@ -10,12 +10,14 @@ export default function Home() {
   const [difference, setDifference] = useState<number>(0);
 
   return (
-    <main>
-      <InputForm
-        setResults={setResults}
-        setDifference={setDifference}
-      />
-      <ResultList results={results} difference={difference} />
+    <main className="min-h-screen bg-gray-50 py-8 flex justify-center">
+      <div className="flex flex-col">
+        <InputForm
+          setResults={setResults}
+          setDifference={setDifference}
+        />
+        <ResultList results={results} difference={difference} />
+      </div>
     </main>
   );
 }
