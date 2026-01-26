@@ -16,7 +16,7 @@ export default function ResultList({ results, shortfall }: Props) {
             })}
             {shortfall !== 0 && (
                 <div style={{ marginTop: "16px", padding: "12px", backgroundColor: "#fff3cd", borderRadius: "4px" }}>
-                    <strong>丸め誤差:</strong> +{shortfall}円（不足分）
+                    <strong>誤差:</strong> +{shortfall}円（不足分）
                 </div>
             )}
         </div>
