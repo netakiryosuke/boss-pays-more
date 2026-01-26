@@ -47,7 +47,7 @@ export default function InputForm({
     };
 
     return (
-        <div className="flex flex-col gap-2 max-w-2xl mx-auto px-4 py-8">
+        <div className="flex flex-col gap-2 py-8">
             <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
                 <InputField
                     label="合計金額"
