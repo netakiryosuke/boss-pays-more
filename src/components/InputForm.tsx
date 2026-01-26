@@ -9,13 +9,13 @@ import InputField from "./InputField";
 import AddAttributeButton from "./AddAttributeButton";
 
 interface Props {
-    results: Result[];
     setResults: (results: Result[]) => void;
+    setShortfall: (shortfall: number) => void;
 }
 
 export default function InputForm({
-    results,
-    setResults
+    setResults,
+    setShortfall
 }: Props) {
     const {
         totalAmount,
@@ -29,8 +29,9 @@ export default function InputForm({
     } = useAttributesForm();
 
     const handleCalculate = () => {
-        const newResults = calculateSplit(attributes, Number(totalAmount));
-        setResults(newResults);
+        const splitResult = calculateSplit(attributes, Number(totalAmount));
+        setResults(splitResult.results);
+        setShortfall(splitResult.shortfall);
     };
 
     const handleRemoveAttribute = (index: number) => {
