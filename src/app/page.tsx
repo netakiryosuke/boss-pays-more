@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 py-8 flex justify-center">
-      <div className="flex flex-col">
+      <div className="w-full max-w-2xl px-4">
         <InputForm
           setResults={setResults}
           setDifference={setDifference}
