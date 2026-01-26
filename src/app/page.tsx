@@ -11,8 +11,7 @@ export default function Home() {
 
   return (
     <main>
-      <InputForm 
-        results={results}
+      <InputForm
         setResults={setResults}
         setShortfall={setShortfall}
       />

@@ -9,13 +9,11 @@ import InputField from "./InputField";
 import AddAttributeButton from "./AddAttributeButton";
 
 interface Props {
-    results: Result[];
     setResults: (results: Result[]) => void;
     setShortfall: (shortfall: number) => void;
 }
 
 export default function InputForm({
-    results,
     setResults,
     setShortfall
 }: Props) {
