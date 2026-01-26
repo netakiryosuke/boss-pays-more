@@ -134,13 +134,6 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
 
     explore(0, new Array(groups.length).fill(0));
 
-    // 最適な組み合わせが見つからない場合（稀）はフォールバック
-    if (!bestCombination) {
-        bestCombination = groups.map((g) =>
-            Math.round(g.theoreticalPerPerson / 1000) * 1000
-        );
-    }
-
     // 結果を構築
     const results = groups.map((group, i) => ({
         position: group.position,
