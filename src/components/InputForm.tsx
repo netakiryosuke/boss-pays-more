@@ -71,7 +71,7 @@ export default function InputForm({
                 ))}
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
                 <AddAttributeButton onClick={addAttribute} />
 
                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
