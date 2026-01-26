@@ -5,7 +5,6 @@ export default function calculateSplit(
     attributes: AttributeInput[],
     totalAmount: number
 ): SplitResult {
-    // 全体の重み合計（weight × count）
     const totalWeight = attributes.reduce((sum, attribute) => {
         const weight = Number(attribute.weight);
         const count = Number(attribute.count);
@@ -40,7 +39,6 @@ export default function calculateSplit(
     );
     const shortfall = totalAmount - calculatedTotal;
 
-    // countプロパティを除外して返す
     return {
         results: results.map(({ position, payAmount }) => ({
             position,
