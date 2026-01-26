@@ -13,6 +13,8 @@ permissions:
   contents: read
   issues: write
   pull-requests: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -110,4 +112,47 @@ jobs:
       - name: Build
         run: npm run build
 
-# TODO: Add deployment steps here
+  deploy_pages:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (static export)
+        run: npm run build
+
+      - name: Ensure static output exists
+        run: test -d out
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
