@@ -1,9 +1,5 @@
 import { RoundingStrategy } from "@/types/roundingStrategy";
 
-/**
- * 1円単位での割り勘計算（切り捨て）
- * 各グループの1人あたりの金額を切り捨てで計算し、不足分はshortfallとして返す
- */
 export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
     const totalWeight = attributes.reduce((sum, attribute) => {
         const weight = Number(attribute.weight);
@@ -12,7 +8,7 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
     }, 0);
 
     if (totalWeight === 0) {
-        return { results: [], shortfall: 0 };
+        return { results: [], difference: 0 };
     }
 
     const results = attributes.map((attribute) => {
@@ -32,27 +28,23 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
         };
     });
 
-    // 丸め誤差による不足額を計算
+    // 丸め誤差を計算（切り捨てのため不足が発生）
     const calculatedTotal = results.reduce(
         (sum, result) => sum + result.payAmount * result.count,
         0
     );
-    const shortfall = totalAmount - calculatedTotal;
+    const difference = totalAmount - calculatedTotal;
 
     return {
         results: results.map(({ position, payAmount }) => ({
             position,
             payAmount,
         })),
-        shortfall,
+        difference,
     };
 };
 
-/**
- * 1000円単位での割り勘計算（切り上げ）
- * 各グループの1人あたりの金額を1000円単位に切り上げで計算し、余剰分はshortfallとして返す
- * 全グループを重みに基づいて同時に計算するため、公平性が保たれる
- */
+
 export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
     const totalWeight = attributes.reduce((sum, attribute) => {
         const weight = Number(attribute.weight);
@@ -61,7 +53,7 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
     }, 0);
 
     if (totalWeight === 0) {
-        return { results: [], shortfall: 0 };
+        return { results: [], difference: 0 };
     }
 
     const results = attributes.map((attribute) => {
@@ -86,14 +78,14 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
         (sum, result) => sum + result.payAmount * result.count,
         0
     );
-    // 1000円単位では余剰が出るため、負の値（支払い過ぎ）になる
-    const shortfall = totalAmount - calculatedTotal;
+    // 1000円単位では切り上げのため、負の値（余剰）になる
+    const difference = totalAmount - calculatedTotal;
 
     return {
         results: results.map(({ position, payAmount }) => ({
             position,
             payAmount,
         })),
-        shortfall,
+        difference,
     };
 };

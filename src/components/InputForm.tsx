@@ -10,12 +10,12 @@ import AddAttributeButton from "./AddAttributeButton";
 
 interface Props {
     setResults: (results: Result[]) => void;
-    setShortfall: (shortfall: number) => void;
+    setDifference: (difference: number) => void;
 }
 
 export default function InputForm({
     setResults,
-    setShortfall
+    setDifference
 }: Props) {
     const {
         totalAmount,
@@ -31,7 +31,7 @@ export default function InputForm({
     const handleCalculate = () => {
         const splitResult = calculateSplit(attributes, Number(totalAmount));
         setResults(splitResult.results);
-        setShortfall(splitResult.shortfall);
+        setDifference(splitResult.difference);
     };
 
     const handleRemoveAttribute = (index: number) => {

@@ -7,15 +7,15 @@ import { useState } from "react";
 
 export default function Home() {
   const [results, setResults] = useState<Result[]>([]);
-  const [shortfall, setShortfall] = useState<number>(0);
+  const [difference, setDifference] = useState<number>(0);
 
   return (
     <main>
       <InputForm
         setResults={setResults}
-        setShortfall={setShortfall}
+        setDifference={setDifference}
       />
-      <ResultList results={results} shortfall={shortfall} />
+      <ResultList results={results} difference={difference} />
     </main>
   );
 }
