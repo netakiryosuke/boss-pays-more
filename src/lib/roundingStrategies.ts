@@ -28,7 +28,7 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
         };
     });
 
-    // 丸め誤差を計算（切り捨てのため不足が発生）
+    // 誤差計算
     const calculatedTotal = results.reduce(
         (sum, result) => sum + result.payAmount * result.count,
         0
@@ -73,12 +73,11 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
         };
     });
 
-    // 実際の合計金額を計算（余剰が出る）
+    // 誤差計算
     const calculatedTotal = results.reduce(
         (sum, result) => sum + result.payAmount * result.count,
         0
     );
-    // 1000円単位では切り上げのため、負の値（余剰）になる
     const difference = totalAmount - calculatedTotal;
 
     return {
