@@ -15,9 +15,6 @@ export default function ResultList({ results, difference }: Props) {
         <div className="max-w-2xl mx-auto px-4 pb-10">
             <div className="flex items-end justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-900">計算結果</h2>
-                {hasResults && (
-                    <span className="text-sm text-gray-500">{results.length}件</span>
-                )}
             </div>
 
             <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">

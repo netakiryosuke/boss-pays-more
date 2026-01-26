@@ -16,7 +16,7 @@ export default function ResultItem({ result }: Props) {
             </div>
             <div className="shrink-0 text-right">
                 <div className="text-base font-semibold text-gray-900 tabular-nums">
-                    {result.payAmount.toLocaleString()}円
+                    {result.payAmount.toLocaleString()}円/人
                 </div>
             </div>
         </div>
