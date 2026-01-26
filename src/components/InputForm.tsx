@@ -80,7 +80,7 @@ export default function InputForm({
                             type="checkbox"
                             checked={use1000YenUnit}
                             onChange={(e) => setUse1000YenUnit(e.target.checked)}
-                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                         />
                         <span className="text-sm font-medium text-gray-700">1000円単位で計算する</span>
                     </label>
