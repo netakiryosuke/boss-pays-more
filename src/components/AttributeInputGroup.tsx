@@ -33,7 +33,7 @@ export default function AttributeInputGroup({
                         label="支払いの重み"
                         value={attribute.weight}
                         onChange={updateWeight}
-                        placeholder="例：2"
+                        placeholder="例：2（1なら等分、2なら2倍支払う）"
                         type="number"
                     />
                     <InputField
