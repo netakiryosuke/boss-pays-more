@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import AttributeInputGroup from "./AttributeInputGroup";
 import useAttributesForm from "@/hooks/useAttributesForm";
 import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/lib/calculateSplit";
+import { roundToYen, roundTo1000Yen } from "@/lib/roundingStrategies";
 import { Result } from "@/types/result";
 import InputField from "./InputField";
 import AddAttributeButton from "./AddAttributeButton";
@@ -17,6 +19,8 @@ export default function InputForm({
     setResults,
     setDifference
 }: Props) {
+    const [use1000YenUnit, setUse1000YenUnit] = useState(true);
+    
     const {
         totalAmount,
         setTotalAmount,
@@ -29,7 +33,8 @@ export default function InputForm({
     } = useAttributesForm();
 
     const handleCalculate = () => {
-        const splitResult = calculateSplit(attributes, Number(totalAmount));
+        const strategy = use1000YenUnit ? roundTo1000Yen : roundToYen;
+        const splitResult = calculateSplit(attributes, Number(totalAmount), strategy);
         setResults(splitResult.results);
         setDifference(splitResult.difference);
     };
@@ -65,6 +70,17 @@ export default function InputForm({
             <AddAttributeButton
                 onClick={addAttribute}
             />
+            <div className="my-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        checked={use1000YenUnit}
+                        onChange={(e) => setUse1000YenUnit(e.target.checked)}
+                        className="w-4 h-4"
+                    />
+                    <span>1000円単位で計算する</span>
+                </label>
+            </div>
             <CalculateButton
                 onClick={handleCalculate}
             />
