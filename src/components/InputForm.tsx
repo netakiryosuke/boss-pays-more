@@ -48,7 +48,6 @@ export default function InputForm({
 
     return (
         <div className="flex flex-col gap-2 max-w-2xl mx-auto px-4 py-8">
-            {/* 合計金額セクション */}
             <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
                 <InputField
                     label="合計金額"
@@ -59,7 +58,6 @@ export default function InputForm({
                 />
             </div>
 
-            {/* 参加者リスト */}
             <div className="flex flex-col gap-2 mb-8">
                 {attributes.map((attribute, index) => (
                     <AttributeInputGroup
@@ -74,10 +72,8 @@ export default function InputForm({
             </div>
 
             <div className="flex flex-col gap-6">
-                {/* 追加ボタン */}
                 <AddAttributeButton onClick={addAttribute} />
 
-                {/* オプション設定 */}
                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <label className="flex items-center gap-3 cursor-pointer">
                         <input
@@ -90,7 +86,6 @@ export default function InputForm({
                     </label>
                 </div>
 
-                {/* 計算ボタン */}
                 <CalculateButton onClick={handleCalculate} />
             </div>
         </div>
