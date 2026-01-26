@@ -15,7 +15,7 @@ export default function ResultList({ results, shortfall }: Props) {
                 return <ResultItem key={index} result={result} />;
             })}
             {shortfall !== 0 && (
-                <div style={{ marginTop: "16px", padding: "12px", backgroundColor: "#fff3cd", borderRadius: "4px" }}>
+                <div className="mt-4 p-3 bg-yellow-100 rounded">
                     <strong>誤差:</strong> +{shortfall}円（不足分）
                 </div>
             )}
