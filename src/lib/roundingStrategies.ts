@@ -28,7 +28,6 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
         };
     });
 
-    // 誤差計算
     const calculatedTotal = results.reduce(
         (sum, result) => sum + result.payAmount * result.count,
         0
@@ -56,35 +55,106 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
         return { results: [], difference: 0 };
     }
 
-    const results = attributes.map((attribute) => {
+    // 各グループの理論値と候補を計算
+    const groups = attributes.map((attribute, index) => {
         const weight = Number(attribute.weight);
         const count = Number(attribute.count);
+        const groupWeight = weight * count;
+        
+        // このグループの理論上の負担額
+        const theoreticalGroupAmount = (totalAmount * groupWeight) / totalWeight;
+        const theoreticalPerPerson = theoreticalGroupAmount / count;
 
-        // この役職グループの負担額
-        const groupAmount = (totalAmount * weight * count) / totalWeight;
-
-        // 1人あたり（1000円単位に切り上げ）
-        const perPersonAmount = Math.ceil(groupAmount / count / 1000) * 1000;
+        // 1000円単位の候補を生成（理論値の前後3つずつ）
+        const baseAmount = Math.floor(theoreticalPerPerson / 1000) * 1000;
+        const candidates: number[] = [];
+        
+        for (let i = -3; i <= 3; i++) {
+            const candidate = baseAmount + i * 1000;
+            if (candidate >= 0) {
+                candidates.push(candidate);
+            }
+        }
 
         return {
             position: attribute.position,
-            payAmount: perPersonAmount,
-            count: count,
+            weight,
+            count,
+            theoreticalPerPerson,
+            candidates,
+            index,
         };
     });
 
-    // 誤差計算
-    const calculatedTotal = results.reduce(
-        (sum, result) => sum + result.payAmount * result.count,
+    // 最適な組み合わせを探索
+    let bestCombination: number[] | null = null;
+    let bestScore = Infinity;
+
+    // 再帰的に全組み合わせを探索
+    function explore(groupIndex: number, currentAmounts: number[]) {
+        if (groupIndex === groups.length) {
+            // 全グループの金額が決定した
+            const totalPaid = groups.reduce(
+                (sum, group, i) => sum + currentAmounts[i] * group.count,
+                0
+            );
+            const surplus = totalPaid - totalAmount;
+
+            // 合計が総額を超える場合はスキップ
+            if (surplus < 0) return;
+
+            // スコア計算: 余剰 + 重み比率からの乖離
+            let deviationScore = 0;
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+                const deviation = Math.abs(
+                    currentAmounts[i] - group.theoreticalPerPerson
+                );
+                // 乖離を正規化（理論値に対する割合）
+                deviationScore += deviation / (group.theoreticalPerPerson || 1);
+            }
+
+            // スコア: 余剰を重視しつつ、乖離も考慮
+            const score = surplus * 100 + deviationScore * 10;
+
+            if (score < bestScore) {
+                bestScore = score;
+                bestCombination = [...currentAmounts];
+            }
+            return;
+        }
+
+        // 現在のグループの各候補を試す
+        const group = groups[groupIndex];
+        for (const candidate of group.candidates) {
+            currentAmounts[groupIndex] = candidate;
+            explore(groupIndex + 1, currentAmounts);
+        }
+    }
+
+    explore(0, new Array(groups.length).fill(0));
+
+    // 最適な組み合わせが見つからない場合（稀）はフォールバック
+    if (!bestCombination) {
+        bestCombination = groups.map((g) =>
+            Math.round(g.theoreticalPerPerson / 1000) * 1000
+        );
+    }
+
+    // 結果を構築
+    const results = groups.map((group, i) => ({
+        position: group.position,
+        payAmount: bestCombination![i],
+    }));
+
+    const calculatedTotal = groups.reduce(
+        (sum, group, i) => sum + bestCombination![i] * group.count,
         0
     );
     const difference = totalAmount - calculatedTotal;
 
     return {
-        results: results.map(({ position, payAmount }) => ({
-            position,
-            payAmount,
-        })),
+        results,
         difference,
     };
 };
