@@ -93,7 +93,6 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
     // 再帰的に全組み合わせを探索
     function explore(groupIndex: number, currentAmounts: number[]) {
         if (groupIndex === groups.length) {
-            // 全グループの金額が決定した
             const totalPaid = groups.reduce(
                 (sum, group, i) => sum + currentAmounts[i] * group.count,
                 0
