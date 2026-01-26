@@ -5,5 +5,5 @@ export interface Result {
 
 export interface SplitResult {
     results: Result[];
-    shortfall: number;
+    difference: number;
 }
