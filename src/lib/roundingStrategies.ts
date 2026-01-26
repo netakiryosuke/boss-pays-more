@@ -66,12 +66,13 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
         const theoreticalPerPerson = theoreticalGroupAmount / count;
 
         // 1000円単位の候補を生成（理論値の前後3つずつ）
-        const baseAmount = Math.floor(theoreticalPerPerson / 1000) * 1000;
+        const MIN_PER_PERSON = 1000;
+        const baseAmount = Math.floor(theoreticalPerPerson / MIN_PER_PERSON) * MIN_PER_PERSON;
         const candidates: number[] = [];
         
         for (let i = -3; i <= 3; i++) {
-            const candidate = baseAmount + i * 1000;
-            if (candidate >= 0) {
+            const candidate = baseAmount + i * MIN_PER_PERSON;
+            if (candidate >= MIN_PER_PERSON) {
                 candidates.push(candidate);
             }
         }
