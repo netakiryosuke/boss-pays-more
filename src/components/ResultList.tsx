@@ -16,7 +16,7 @@ export default function ResultList({ results, difference }: Props) {
             })}
             {difference !== 0 && (
                 <div className="mt-4 p-3 bg-yellow-100 rounded">
-                    <strong>誤差:</strong> {difference > 0 ? `+${difference}円（不足分）` : `${Math.abs(difference)}円（余剰）`}
+                    <strong>誤差:</strong> {difference > 0 ? `${difference}円（不足分）` : `${Math.abs(difference)}円（余剰分）`}
                 </div>
             )}
         </div>
