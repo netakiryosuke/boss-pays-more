@@ -48,7 +48,7 @@ export default function AttributeInputGroup({
                     type="button"
                     onClick={onRemove}
                     className="w-full py-2 px-4 text-sm font-medium text-red-600 bg-red-50 rounded-lg
-                            hover:bg-red-100 transition-colors duration-200 cursor-pointer
+                            hover:bg-red-100 transition-colors duration-200
                             border border-red-200 hover:border-red-300"
                 >
                     参加者を削除
