@@ -47,16 +47,21 @@ export default function InputForm({
     };
 
     return (
-        <div>
-            <InputField
-                label="合計金額"
-                value={totalAmount}
-                onChange={setTotalAmount}
-                placeholder="例：10000"
-                type="number"
-            />
-            {attributes.map((attribute, index) => {
-                return (
+        <div className="max-w-2xl mx-auto px-4 py-8">
+            {/* 合計金額セクション */}
+            <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+                <InputField
+                    label="合計金額"
+                    value={totalAmount}
+                    onChange={setTotalAmount}
+                    placeholder="例：10000"
+                    type="number"
+                />
+            </div>
+
+            {/* 参加者リスト */}
+            <div className="space-y-4 mb-6">
+                {attributes.map((attribute, index) => (
                     <AttributeInputGroup
                         key={index}
                         attribute={attribute}
@@ -65,25 +70,29 @@ export default function InputForm({
                         updateCount={count => updateCount(index, count)}
                         onRemove={() => handleRemoveAttribute(index)}
                     />
-                )
-            })}
-            <AddAttributeButton
-                onClick={addAttribute}
-            />
-            <div className="my-4">
-                <label className="flex items-center gap-2 cursor-pointer">
+                ))}
+            </div>
+
+            {/* 追加ボタン */}
+            <div className="mb-6">
+                <AddAttributeButton onClick={addAttribute} />
+            </div>
+
+            {/* オプション設定 */}
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <label className="flex items-center gap-3 cursor-pointer">
                     <input
                         type="checkbox"
                         checked={use1000YenUnit}
                         onChange={(e) => setUse1000YenUnit(e.target.checked)}
-                        className="w-4 h-4"
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
                     />
-                    <span>1000円単位で計算する</span>
+                    <span className="text-sm font-medium text-gray-700">1000円単位で計算する</span>
                 </label>
             </div>
-            <CalculateButton
-                onClick={handleCalculate}
-            />
+
+            {/* 計算ボタン */}
+            <CalculateButton onClick={handleCalculate} />
         </div>
     );
 }
