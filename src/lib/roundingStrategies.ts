@@ -56,7 +56,7 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
     }
 
     // 各グループの理論値と候補を計算
-    const groups = attributes.map((attribute, index) => {
+    const groups = attributes.map((attribute, _index) => {
         const weight = Number(attribute.weight);
         const count = Number(attribute.count);
         const groupWeight = weight * count;
@@ -82,7 +82,6 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
             count,
             theoreticalPerPerson,
             candidates,
-            index,
         };
     });
 
