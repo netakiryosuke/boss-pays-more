@@ -20,7 +20,7 @@ export default function InputForm({
     setDifference
 }: Props) {
     const [use1000YenUnit, setUse1000YenUnit] = useState(true);
-    
+
     const {
         totalAmount,
         setTotalAmount,
@@ -47,46 +47,53 @@ export default function InputForm({
     };
 
     return (
-        <div className="flex flex-col gap-2 py-8">
-            <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                <InputField
-                    label="合計金額"
-                    value={totalAmount}
-                    onChange={setTotalAmount}
-                    placeholder="例：10000"
-                    type="number"
-                />
-            </div>
-
-            <div className="flex flex-col gap-2 mb-8">
-                {attributes.map((attribute, index) => (
-                    <AttributeInputGroup
-                        key={index}
-                        attribute={attribute}
-                        updatePosition={position => updatePosition(index, position)}
-                        updateWeight={weight => updateWeight(index, weight)}
-                        updateCount={count => updateCount(index, count)}
-                        onRemove={() => handleRemoveAttribute(index)}
+        <div className="max-w-2xl mx-auto px-4 py-8">
+            <div className="flex flex-col gap-6">
+                <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <InputField
+                        label="合計金額"
+                        value={totalAmount}
+                        onChange={setTotalAmount}
+                        placeholder="例：10000"
+                        type="number"
                     />
-                ))}
-            </div>
-
-            <div className="flex flex-col gap-2">
-                <AddAttributeButton onClick={addAttribute} />
-
-                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <label className="flex items-center gap-3 cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={use1000YenUnit}
-                            onChange={(e) => setUse1000YenUnit(e.target.checked)}
-                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
-                        <span className="text-sm font-medium text-gray-700">1000円単位で計算する</span>
-                    </label>
                 </div>
 
-                <CalculateButton onClick={handleCalculate} />
+                <div
+                    className="max-h-[45vh] overflow-y-auto border border-gray-200 rounded-xl bg-white p-4"
+                    style={{ scrollbarGutter: "stable" }}
+                >
+                    <div className="flex flex-col gap-6">
+                        {attributes.map((attribute, index) => (
+                            <AttributeInputGroup
+                                key={index}
+                                attribute={attribute}
+                                updatePosition={position => updatePosition(index, position)}
+                                updateWeight={weight => updateWeight(index, weight)}
+                                updateCount={count => updateCount(index, count)}
+                                onRemove={() => handleRemoveAttribute(index)}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="flex flex-col gap-6">
+                    <AddAttributeButton onClick={addAttribute} />
+
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <label className="flex items-center gap-3 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={use1000YenUnit}
+                                onChange={(e) => setUse1000YenUnit(e.target.checked)}
+                                className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                            />
+                            <span className="text-sm font-medium text-gray-700">1000円単位で計算する</span>
+                        </label>
+                    </div>
+
+                    <CalculateButton onClick={handleCalculate} />
+                </div>
             </div>
         </div>
     );
