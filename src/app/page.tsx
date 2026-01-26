@@ -1,6 +1,7 @@
 "use client";
 
 import InputForm from "@/components/InputForm";
+import ResultList from "@/components/ResultList";
 import { Result } from "@/types/result";
 import { useState } from "react";
 
@@ -13,6 +14,7 @@ export default function Home() {
         results={results}
         setResults={setResults}
       />
+      <ResultList results={results} />
     </main>
   );
 }

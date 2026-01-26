@@ -8,6 +8,8 @@ interface Props {
 
 export default function ResultItem({ result }: Props) {
     return (
-        <></>
+        <div>
+            {result.position}: {result.payAmount}
+        </div>
     );
 }
