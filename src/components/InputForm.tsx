@@ -44,8 +44,12 @@ export default function InputForm({
     const displayTotalAmountError = submitAttempted ? totalAmountError : null;
 
     const handleCalculate = () => {
-        setSubmitAttempted(true);
-        if (!isValid) return;
+        if (!isValid) {
+            setSubmitAttempted(true);
+            return;
+        }
+
+        setSubmitAttempted(false);
 
         const strategy = use1000YenUnit ? roundTo1000Yen : roundToYen;
         const splitResult = calculateSplit(attributes, Number(totalAmount), strategy);
