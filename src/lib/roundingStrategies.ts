@@ -1,5 +1,10 @@
 import { RoundingStrategy } from "@/types/roundingStrategy";
 
+const normalizePosition = (position: string): string => {
+    const trimmed = position.trim();
+    return trimmed === "" ? "名無しさん" : trimmed;
+};
+
 export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
     const totalWeight = attributes.reduce((sum, attribute) => {
         const weight = Number(attribute.weight);
@@ -22,7 +27,7 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
         const perPersonAmount = Math.floor(groupAmount / count);
 
         return {
-            position: attribute.position,
+            position: normalizePosition(attribute.position),
             payAmount: perPersonAmount,
             count: count,
         };
@@ -78,7 +83,7 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
         }
 
         return {
-            position: attribute.position,
+            position: normalizePosition(attribute.position),
             weight,
             count,
             theoreticalPerPerson,
