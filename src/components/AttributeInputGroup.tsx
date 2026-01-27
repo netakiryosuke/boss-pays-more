@@ -9,6 +9,10 @@ interface Props {
     updateWeight: (weight: string) => void;
     updateCount: (count: string) => void;
     onRemove: () => void;
+    errors?: {
+        weight?: string | null;
+        count?: string | null;
+    };
 }
 
 export default function AttributeInputGroup({
@@ -16,7 +20,8 @@ export default function AttributeInputGroup({
     updatePosition,
     updateWeight,
     updateCount,
-    onRemove
+    onRemove,
+    errors
 }: Props) {
 
     return (
@@ -35,6 +40,9 @@ export default function AttributeInputGroup({
                         onChange={updateWeight}
                         placeholder="例：2（1なら等分、2なら2倍支払う）"
                         type="number"
+                        min={1}
+                        step={1}
+                        error={errors?.weight}
                     />
                     <InputField
                         label="人数"
@@ -42,6 +50,9 @@ export default function AttributeInputGroup({
                         onChange={updateCount}
                         placeholder="例：3"
                         type="number"
+                        min={1}
+                        step={1}
+                        error={errors?.count}
                     />
                 </div>
                 <button
