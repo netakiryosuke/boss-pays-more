@@ -20,7 +20,11 @@ export function validatePositiveNumberString(
     if (num === null) return `${opts.label}は数値で入力してください`;
 
     const minExclusive = opts.minExclusive ?? 0;
-    if (num <= minExclusive) return `${opts.label}は${minExclusive}より大きい値を入力してください`;
+    if (num <= minExclusive) {
+        return minExclusive === 0
+            ? `${opts.label}は正の値を入力してください`
+            : `${opts.label}は${minExclusive}より大きい値を入力してください`;
+    }
 
     return null;
 }
