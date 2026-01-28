@@ -40,8 +40,8 @@ export default function AttributeInputGroup({
                         onChange={updateWeight}
                         placeholder="例：2（1なら等分、2なら2倍支払う）"
                         type="number"
-                        min={1}
-                        step={1}
+                        min={0}
+                        step="any"
                         error={errors?.weight}
                     />
                     <InputField

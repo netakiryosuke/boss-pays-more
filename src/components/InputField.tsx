@@ -10,7 +10,7 @@ interface Props {
     type?: string;
     error?: string | null;
     min?: number;
-    step?: number;
+    step?: number | "any";
 }
 
 export default function InputField({
