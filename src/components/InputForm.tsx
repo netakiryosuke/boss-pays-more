@@ -64,6 +64,11 @@ export default function InputForm({
         removeAttribute(index);
     };
 
+    const handleAddAttribute = () => {
+        setSubmitAttempted(false);
+        addAttribute();
+    };
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
             <div className="flex flex-col gap-6">
@@ -111,9 +116,9 @@ export default function InputForm({
                 </div>
 
                 <div className="flex flex-col gap-6">
-                    <AddAttributeButton onClick={addAttribute} />
+                    <AddAttributeButton onClick={handleAddAttribute} />
 
-                    {submitAttempted && !isValid && !attributesError? (
+                    {submitAttempted && !isValid && !attributesError ? (
                         <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
                             未入力または不正な値があります。赤い項目を修正してください。
                         </div>
