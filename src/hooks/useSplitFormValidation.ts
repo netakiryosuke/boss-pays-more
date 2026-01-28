@@ -4,7 +4,7 @@ import {
     ValidationError,
     validatePositiveIntegerString,
     validatePositiveNumberString
-} from "@/lib/validation";
+} from "@/utils/validation";
 
 export type AttributeInputErrors = {
     weight: ValidationError;
