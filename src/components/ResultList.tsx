@@ -12,12 +12,12 @@ export default function ResultList({ results, difference }: Props) {
     const hasResults = results.length > 0;
 
     return (
-        <div className="max-w-2xl mx-auto px-4 pb-10">
+        <div className="max-w-2xl mx-auto px-4 pb-6 sm:pb-10">
             <div className="flex items-end justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-900">計算結果</h2>
             </div>
 
-            <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="p-4 sm:p-6 bg-white rounded-xl shadow-sm border border-gray-200">
                 {!hasResults ? (
                     <p className="text-sm text-gray-500">
                         まだ結果がありません。上で入力して「計算する」を押してください。

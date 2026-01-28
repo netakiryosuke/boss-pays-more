@@ -71,9 +71,9 @@ export default function InputForm({
     };
 
     return (
-        <div className="max-w-2xl mx-auto px-4 py-8">
-            <div className="flex flex-col gap-6">
-                <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="max-w-2xl mx-auto px-4 sm:px-4 py-4 sm:py-8">
+            <div className="flex flex-col gap-4 sm:gap-6">
+                <div className="p-4 sm:p-6 bg-white rounded-xl shadow-sm border border-gray-200">
                     <InputField
                         label="合計金額"
                         value={totalAmount}
@@ -87,10 +87,10 @@ export default function InputForm({
                 </div>
 
                 <div
-                    className="max-h-[45vh] overflow-y-auto border border-gray-200 rounded-xl bg-white p-4"
+                    className="max-h-[45vh] overflow-y-auto border border-gray-200 rounded-xl bg-white p-3 sm:p-4"
                     style={{ scrollbarGutter: "stable" }}
                 >
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4 sm:gap-6">
                         {submitAttempted && participantGroupsError ? (
                             <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
                                 {participantGroupsError}
@@ -116,7 +116,7 @@ export default function InputForm({
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4 sm:gap-6">
                     <AddParticipantGroupButton onClick={handleAddParticipantGroup} />
 
                     {submitAttempted && !isValid && !participantGroupsError ? (
