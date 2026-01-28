@@ -71,7 +71,7 @@ export default function InputForm({
     };
 
     return (
-        <div className="max-w-2xl mx-auto px-4 sm:px-4 py-4 sm:py-8">
+        <div className="max-w-2xl mx-auto px-4 py-4 sm:py-8">
             <div className="flex flex-col gap-4 sm:gap-6">
                 <div className="p-4 sm:p-6 bg-white rounded-xl shadow-sm border border-gray-200">
                     <InputField
