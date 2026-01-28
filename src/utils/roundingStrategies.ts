@@ -5,8 +5,8 @@ const normalizePosition = (position: string): string => {
     return trimmed === "" ? "名無しさん" : trimmed;
 };
 
-export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
-    const totalWeight = attributes.reduce((sum, group) => {
+export const roundToYen: RoundingStrategy = (participantGroups, totalAmount) => {
+    const totalWeight = participantGroups.reduce((sum, group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
         return sum + weight * count;
@@ -16,7 +16,7 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
         return { results: [], difference: 0 };
     }
 
-    const results = attributes.map((group) => {
+    const results = participantGroups.map((group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
 
@@ -49,8 +49,8 @@ export const roundToYen: RoundingStrategy = (attributes, totalAmount) => {
 };
 
 
-export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
-    const totalWeight = attributes.reduce((sum, group) => {
+export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount) => {
+    const totalWeight = participantGroups.reduce((sum, group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
         return sum + weight * count;
@@ -61,7 +61,7 @@ export const roundTo1000Yen: RoundingStrategy = (attributes, totalAmount) => {
     }
 
     // 各グループの理論値と候補を計算
-    const groups = attributes.map((group) => {
+    const groups = participantGroups.map((group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
         const groupWeight = weight * count;
