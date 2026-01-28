@@ -10,7 +10,7 @@ export default function Home() {
   const [difference, setDifference] = useState<number>(0);
 
   return (
-    <main className="min-h-screen bg-gray-50 py-8 flex justify-center">
+    <main className="min-h-screen bg-gray-50 py-4 sm:py-8 flex justify-center">
       <div className="w-full max-w-2xl px-4">
         <InputForm
           setResults={setResults}

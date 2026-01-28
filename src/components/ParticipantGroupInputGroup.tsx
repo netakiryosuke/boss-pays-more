@@ -24,7 +24,7 @@ export default function ParticipantGroupInputGroup({
     errors
 }: Props) {
     return (
-        <div className="p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+        <div className="p-4 sm:p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200">
             <div className="space-y-4">
                 <InputField
                     label="役職"
@@ -32,7 +32,7 @@ export default function ParticipantGroupInputGroup({
                     onChange={updatePosition}
                     placeholder="例：部長"
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <InputField
                         label="支払いの重み（1=等分）"
                         value={participantGroup.weight}
