@@ -37,7 +37,7 @@ export default function ParticipantGroupInputGroup({
                         label="支払いの重み（1=等分）"
                         value={participantGroup.weight}
                         onChange={updateWeight}
-                        placeholder="例：2.5"
+                        placeholder="例：2（2倍支払う）"
                         type="number"
                         min={0}
                         step="any"
