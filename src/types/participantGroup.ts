@@ -1,4 +1,4 @@
-export interface AttributeInput {
+export interface ParticipantGroupInput {
     position: string;
     weight: string;
     count: string;

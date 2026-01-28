@@ -1,6 +1,6 @@
-import { AttributeInput } from "./attribute";
+import { ParticipantGroupInput } from "./participantGroup";
 import { SplitResult } from "./result";
 
 export interface RoundingStrategy {
-    (attributes: AttributeInput[], totalAmount: number): SplitResult;
+    (participantGroups: ParticipantGroupInput[], totalAmount: number): SplitResult;
 }
