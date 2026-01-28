@@ -64,10 +64,6 @@ export default function InputForm({
         removeAttribute(index);
     };
 
-    const handleAddAttribute = () => {
-        addAttribute();
-    };
-
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
             <div className="flex flex-col gap-6">
@@ -115,7 +111,7 @@ export default function InputForm({
                 </div>
 
                 <div className="flex flex-col gap-6">
-                    <AddAttributeButton onClick={handleAddAttribute} />
+                    <AddAttributeButton onClick={addAttribute} />
 
                     {submitAttempted && !isValid ? (
                         <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
