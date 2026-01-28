@@ -1,10 +1,10 @@
 "use client";
 
 import InputField from "./InputField";
-import { AttributeInput } from "@/types/attribute";
+import { ParticipantGroupInput } from "@/types/participantGroup";
 
 interface Props {
-    attribute: AttributeInput;
+    participantGroup: ParticipantGroupInput;
     updatePosition: (position: string) => void;
     updateWeight: (weight: string) => void;
     updateCount: (count: string) => void;
@@ -15,28 +15,27 @@ interface Props {
     };
 }
 
-export default function AttributeInputGroup({
-    attribute,
+export default function ParticipantGroupInputGroup({
+    participantGroup,
     updatePosition,
     updateWeight,
     updateCount,
     onRemove,
     errors
 }: Props) {
-
     return (
         <div className="p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200">
             <div className="space-y-4">
                 <InputField
-                    label="属性"
-                    value={attribute.position}
+                    label="役職"
+                    value={participantGroup.position}
                     onChange={updatePosition}
                     placeholder="例：部長"
                 />
                 <div className="grid grid-cols-2 gap-4">
                     <InputField
                         label="支払いの重み"
-                        value={attribute.weight}
+                        value={participantGroup.weight}
                         onChange={updateWeight}
                         placeholder="例：2（1なら等分、2なら2倍支払う）"
                         type="number"
@@ -46,7 +45,7 @@ export default function AttributeInputGroup({
                     />
                     <InputField
                         label="人数"
-                        value={attribute.count}
+                        value={participantGroup.count}
                         onChange={updateCount}
                         placeholder="例：3"
                         type="number"

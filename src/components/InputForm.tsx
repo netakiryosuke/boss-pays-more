@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import AttributeInputGroup from "./AttributeInputGroup";
-import useAttributesForm from "@/hooks/useAttributesForm";
+import ParticipantGroupInputGroup from "./ParticipantGroupInputGroup";
+import useParticipantGroupsForm from "@/hooks/useParticipantGroupsForm";
 import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/utils/calculateSplit";
 import { roundToYen, roundTo1000Yen } from "@/utils/roundingStrategies";
 import { Result } from "@/types/result";
 import InputField from "./InputField";
-import AddAttributeButton from "./AddAttributeButton";
+import AddParticipantGroupButton from "./AddParticipantGroupButton";
 import useSplitFormValidation from "@/hooks/useSplitFormValidation";
 
 interface Props {
@@ -26,20 +26,20 @@ export default function InputForm({
     const {
         totalAmount,
         setTotalAmount,
-        attributes,
+        participantGroups,
         updatePosition,
         updateWeight,
         updateCount,
-        addAttribute,
-        removeAttribute
-    } = useAttributesForm();
+        addParticipantGroup,
+        removeParticipantGroup
+    } = useParticipantGroupsForm();
 
     const {
         isValid,
         totalAmountError,
-        attributesError,
-        attributeErrors
-    } = useSplitFormValidation(totalAmount, attributes);
+        participantGroupsError,
+        participantGroupErrors
+    } = useSplitFormValidation(totalAmount, participantGroups);
 
     const displayTotalAmountError = submitAttempted ? totalAmountError : null;
 
@@ -52,22 +52,22 @@ export default function InputForm({
         setSubmitAttempted(false);
 
         const strategy = use1000YenUnit ? roundTo1000Yen : roundToYen;
-        const splitResult = calculateSplit(attributes, Number(totalAmount), strategy);
+        const splitResult = calculateSplit(participantGroups, Number(totalAmount), strategy);
         setResults(splitResult.results);
         setDifference(splitResult.difference);
     };
 
-    const handleRemoveAttribute = (index: number) => {
+    const handleRemoveParticipantGroup = (index: number) => {
         const ok = window.confirm("本当にこの参加者を削除しますか？");
         if (!ok) return;
 
-        removeAttribute(index);
+        removeParticipantGroup(index);
         setSubmitAttempted(false);
     };
 
-    const handleAddAttribute = () => {
+    const handleAddParticipantGroup = () => {
         setSubmitAttempted(false);
-        addAttribute();
+        addParticipantGroup();
     };
 
     return (
@@ -91,25 +91,25 @@ export default function InputForm({
                     style={{ scrollbarGutter: "stable" }}
                 >
                     <div className="flex flex-col gap-6">
-                        {submitAttempted && attributesError ? (
+                        {submitAttempted && participantGroupsError ? (
                             <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
-                                {attributesError}
+                                {participantGroupsError}
                             </div>
                         ) : null}
 
-                        {attributes.map((attribute, index) => (
-                            <AttributeInputGroup
+                        {participantGroups.map((participantGroup, index) => (
+                            <ParticipantGroupInputGroup
                                 key={index}
-                                attribute={attribute}
+                                participantGroup={participantGroup}
                                 updatePosition={position => updatePosition(index, position)}
                                 updateWeight={weight => updateWeight(index, weight)}
                                 updateCount={count => updateCount(index, count)}
-                                onRemove={() => handleRemoveAttribute(index)}
+                                onRemove={() => handleRemoveParticipantGroup(index)}
                                 errors={{
                                     weight:
-                                        submitAttempted ? attributeErrors[index]?.weight : null,
+                                        submitAttempted ? participantGroupErrors[index]?.weight : null,
                                     count:
-                                        submitAttempted ? attributeErrors[index]?.count : null
+                                        submitAttempted ? participantGroupErrors[index]?.count : null
                                 }}
                             />
                         ))}
@@ -117,9 +117,9 @@ export default function InputForm({
                 </div>
 
                 <div className="flex flex-col gap-6">
-                    <AddAttributeButton onClick={handleAddAttribute} />
+                    <AddParticipantGroupButton onClick={handleAddParticipantGroup} />
 
-                    {submitAttempted && !isValid && !attributesError ? (
+                    {submitAttempted && !isValid && !participantGroupsError ? (
                         <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
                             未入力または不正な値があります。赤い項目を修正してください。
                         </div>

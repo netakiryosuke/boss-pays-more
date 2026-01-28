@@ -4,7 +4,7 @@ interface Props {
     onClick: () => void;
 }
 
-export default function AddAttributeButton({ onClick }: Props) {
+export default function AddParticipantGroupButton({ onClick }: Props) {
     return (
         <button
             type="button"
