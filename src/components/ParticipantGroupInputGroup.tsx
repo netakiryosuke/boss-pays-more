@@ -34,10 +34,10 @@ export default function ParticipantGroupInputGroup({
                 />
                 <div className="grid grid-cols-2 gap-4">
                     <InputField
-                        label="支払いの重み"
+                        label="支払いの重み（1=等分）"
                         value={participantGroup.weight}
                         onChange={updateWeight}
-                        placeholder="例：2（1なら等分、2なら2倍支払う）"
+                        placeholder="例：2（2倍支払う）"
                         type="number"
                         min={0}
                         step="any"
