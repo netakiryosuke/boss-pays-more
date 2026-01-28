@@ -8,10 +8,8 @@ export default function CalculateButton({ onClick }: Props) {
     return (
         <button
             type="button"
-            className="w-full py-3.5 bg-blue-600 text-white rounded-xl font-semibold text-lg
-                    hover:bg-blue-700 active:bg-blue-800
-                    transition-all duration-200 cursor-pointer
-                    shadow-md hover:shadow-lg"
+            className="w-full py-3.5 rounded-xl font-semibold text-lg transition-all duration-200 shadow-md
+                    bg-blue-600 text-white cursor-pointer hover:bg-blue-700 active:bg-blue-800 hover:shadow-lg"
             onClick={onClick}
         >
             計算する

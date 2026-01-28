@@ -7,11 +7,13 @@ interface Props {
 }
 
 export default function ResultItem({ result }: Props) {
+    const displayPosition = result.position === "" ? "名無しさん" : result.position;
+
     return (
         <div className="py-4 flex items-center justify-between gap-4">
             <div className="min-w-0">
                 <div className="text-sm font-medium text-gray-900 truncate">
-                    {result.position}
+                    {displayPosition}
                 </div>
             </div>
             <div className="shrink-0 text-right">
