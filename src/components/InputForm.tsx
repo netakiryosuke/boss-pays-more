@@ -133,8 +133,6 @@ export default function InputForm({
 
                     <CalculateButton
                         onClick={handleCalculate}
-                        disabled={!isValid}
-                        onDisabledClick={() => setSubmitAttempted(true)}
                     />
                 </div>
             </div>
