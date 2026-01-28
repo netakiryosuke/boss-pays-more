@@ -6,7 +6,7 @@ import {
     validatePositiveNumberString
 } from "@/utils/validation";
 
-export type RoleGroupInputErrors = {
+export type ParticipantGroupInputErrors = {
     weight: ValidationError;
     count: ValidationError;
 };
@@ -18,7 +18,7 @@ export default function useSplitFormValidation(
     isValid: boolean;
     totalAmountError: ValidationError;
     participantGroupsError: ValidationError;
-    participantGroupErrors: RoleGroupInputErrors[];
+    participantGroupErrors: ParticipantGroupInputErrors[];
 } {
     return useMemo(() => {
         const totalAmountError = validatePositiveIntegerString(totalAmount, { label: "合計金額" });
@@ -26,7 +26,7 @@ export default function useSplitFormValidation(
         const participantGroupsError =
             participantGroups.length === 0 ? "参加者を1人以上追加してください" : null;
 
-        const participantGroupErrors: RoleGroupInputErrors[] = participantGroups.map(group => ({
+        const participantGroupErrors: ParticipantGroupInputErrors[] = participantGroups.map(group => ({
             weight: validatePositiveNumberString(group.weight, { label: "支払いの重み" }),
             count: validatePositiveIntegerString(group.count, { label: "人数" })
         }));
