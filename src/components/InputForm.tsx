@@ -62,6 +62,7 @@ export default function InputForm({
         if (!ok) return;
 
         removeAttribute(index);
+        setSubmitAttempted(false);
     };
 
     const handleAddAttribute = () => {
