@@ -177,14 +177,15 @@ export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount)
 
     // まずは従来どおりの候補範囲（±3）で探し、なければ少しだけ広げる
     const rangeSteps = [3, 6, 10, 20, 30];
-    let groups = buildGroups(3);
-    let bestCombination: number[] | null = null;
+    const firstResult = findBestCombination(rangeSteps[0]);
+    let groups = firstResult.groups;
+    let bestCombination: number[] | null = firstResult.bestCombination;
 
-    for (const range of rangeSteps) {
+    for (const range of rangeSteps.slice(1)) {
+        if (bestCombination) break;
         const result = findBestCombination(range);
         groups = result.groups;
         bestCombination = result.bestCombination;
-        if (bestCombination) break;
     }
 
     if (!bestCombination) {
