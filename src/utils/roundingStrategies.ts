@@ -176,7 +176,7 @@ export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount)
     };
 
     // まずは従来どおりの候補範囲（±3）で探し、なければ少しだけ広げる
-    const rangeSteps = [3, 6, 10, 20, 30];
+    const rangeSteps = [3, 6, 10, 20, 30, 60];
     const firstResult = findBestCombination(rangeSteps[0]);
     let groups = firstResult.groups;
     let bestCombination: number[] | null = firstResult.bestCombination;
@@ -184,14 +184,6 @@ export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount)
     for (const range of rangeSteps.slice(1)) {
         if (bestCombination) break;
         const result = findBestCombination(range);
-        groups = result.groups;
-        bestCombination = result.bestCombination;
-    }
-
-    if (!bestCombination) {
-        // この条件で解が見つからないのは入力が極端な場合のみ想定だが、
-        // UI側で「結果なし」表示になるのを避けるため、最後は候補を広げて必ず探す
-        const result = findBestCombination(60);
         groups = result.groups;
         bestCombination = result.bestCombination;
     }
