@@ -15,6 +15,11 @@ updates:
     labels:
       - "dependencies"
 
+    ignore:
+      # eslint-config-next が ESLint 10 未対応のため、ESLint v10 以上へのアップグレードを抑制する
+      - dependency-name: "eslint"
+        versions: [">=10"]
+
     groups:
       npm-dependencies:
         patterns:
