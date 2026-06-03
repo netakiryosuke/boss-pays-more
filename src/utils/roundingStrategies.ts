@@ -1,4 +1,4 @@
-import RoundingOptions from "@/types/roudingOptions";
+import RoundingOptions from "@/types/roundingOptions";
 import { RoundingStrategy } from "@/types/roundingStrategy";
 
 const normalizePosition = (position: string): string => {
