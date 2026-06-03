@@ -123,22 +123,20 @@ export default function InputForm({
                     <AddParticipantGroupButton onClick={handleAddParticipantGroup} />
 
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <label className="flex items-center gap-3 cursor-pointer">
-                            <input
-                                type="checkbox"
-                                checked={roundingEnabled}
-                                onChange={(e) => setRoundingEnabled(e.target.checked)}
-                                className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                            />
-                            <InputField
-                                value={roundingUnit}
-                                onChange={(value) => setRoundingUnit(value)}
-                                placeholder="例：1000"
-                                min={1}
-                                error={submitAttempted ? roundingUnitError : null}
-                            />
-                            <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
-                        </label>
+                        <input
+                            type="checkbox"
+                            checked={roundingEnabled}
+                            onChange={(e) => setRoundingEnabled(e.target.checked)}
+                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                        />
+                        <InputField
+                            value={roundingUnit}
+                            onChange={(value) => setRoundingUnit(value)}
+                            placeholder="例：1000"
+                            min={1}
+                            error={submitAttempted ? roundingUnitError : null}
+                        />
+                        <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
                     </div>
 
                     {submitAttempted && !isValid && !participantGroupsError ? (
