@@ -22,6 +22,7 @@ export default function InputForm({
 }: Props) {
     const [roundingEnabled, setRoundingEnabled] = useState(true);
     const [roundingUnit, setRoundingUnit] = useState("1000");
+    const [allowSurblus, setAllowSurplus] = useState(true);
     const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const {
@@ -53,7 +54,9 @@ export default function InputForm({
 
         setSubmitAttempted(false);
 
-        const strategy = roundingEnabled ? roundToUnit(Number(roundingUnit)) : roundToYen;
+        const strategy = roundingEnabled ? roundToUnit(Number(roundingUnit), {
+            surplusWeight: allowSurblus ? 10 : 100,
+        }) : roundToYen;
 
         const splitResult = calculateSplit(participantGroups, Number(totalAmount), strategy);
         setResults(splitResult.results);
@@ -137,6 +140,16 @@ export default function InputForm({
                             error={submitAttempted ? roundingUnitError : null}
                         />
                         <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
+                    </div>
+
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <input
+                            type="checkbox"
+                            checked={allowSurblus}
+                            onChange={(e) => setAllowSurplus(e.target.checked)}
+                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-sm font-medium text-gray-700">余剰をある程度許容する</span>
                     </div>
 
                     {submitAttempted && !isValid && !participantGroupsError ? (
