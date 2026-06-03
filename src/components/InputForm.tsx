@@ -39,8 +39,9 @@ export default function InputForm({
         isValid,
         totalAmountError,
         participantGroupsError,
-        participantGroupErrors
-    } = useSplitFormValidation(totalAmount, participantGroups);
+        participantGroupErrors,
+        roundingUnitError
+    } = useSplitFormValidation(totalAmount, participantGroups, roundingUnit, roundingEnabled);
 
     const displayTotalAmountError = submitAttempted ? totalAmountError : null;
 
@@ -140,6 +141,7 @@ export default function InputForm({
                                 onChange={(value) => setRoundingUnit(value)}
                                 placeholder="例：1000"
                                 min={1}
+                                error={submitAttempted ? roundingUnitError : null}
                             />
                             <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
                         </label>
