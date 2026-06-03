@@ -132,9 +132,9 @@ export default function InputForm({
                                 type="checkbox"
                                 checked={roundingEnabled}
                                 onChange={(e) => setRoundingEnabled(e.target.checked)}
-                                className="w-5 h-5 flex-shrink-0 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                                className="h-5 flex-shrink-0 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                             />
-                            <div className="w-24 flex-shrink-0">
+                            <div className="flex-shrink-0">
                                 <InputField
                                     value={roundingUnit}
                                     onChange={(value) => setRoundingUnit(value)}
