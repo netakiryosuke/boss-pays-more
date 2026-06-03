@@ -49,7 +49,7 @@ export const roundToYen: RoundingStrategy = (participantGroups, totalAmount) => 
 };
 
 
-export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount) => {
+export const roundToUnit = (unit: number): RoundingStrategy => (participantGroups, totalAmount) => {
     const totalWeight = participantGroups.reduce((sum, group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
@@ -61,7 +61,7 @@ export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount)
     }
 
     // 各グループの理論値と候補を計算
-    const MIN_PER_PERSON = 1000;
+    const MIN_PER_PERSON = unit;
 
     const buildGroups = (candidateRange: number) =>
         participantGroups.map((group) => {
@@ -73,7 +73,7 @@ export const roundTo1000Yen: RoundingStrategy = (participantGroups, totalAmount)
             const theoreticalGroupAmount = (totalAmount * groupWeight) / totalWeight;
             const theoreticalPerPerson = theoreticalGroupAmount / count;
 
-            // 1000円単位の候補を生成（理論値の前後 candidateRange ずつ）
+            // unit円単位の候補を生成（理論値の前後 candidateRange ずつ）
             const baseAmount =
                 Math.floor(theoreticalPerPerson / MIN_PER_PERSON) * MIN_PER_PERSON;
             const candidates: number[] = [];

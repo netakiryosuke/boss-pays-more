@@ -3,7 +3,7 @@
 import { useId } from "react";
 
 interface Props {
-    label: string;
+    label?: string;
     value: string;
     onChange: (value: string) => void;
     placeholder: string;
@@ -28,9 +28,11 @@ export default function InputField({
 
     return (
         <div>
-            <label htmlFor={id} className="text-sm font-medium text-gray-900">
-                {label}
-            </label>
+            {label && (
+                <label htmlFor={id} className="text-sm font-medium text-gray-900">
+                    {label}
+                </label>
+            )}
             <input
                 id={id}
                 type={type ?? "text"}

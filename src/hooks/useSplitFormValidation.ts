@@ -13,12 +13,15 @@ export type ParticipantGroupInputErrors = {
 
 export default function useSplitFormValidation(
     totalAmount: string,
-    participantGroups: ParticipantGroupInput[]
+    participantGroups: ParticipantGroupInput[],
+    roundingUnit: string,
+    roundingEnabled: boolean
 ): {
     isValid: boolean;
     totalAmountError: ValidationError;
     participantGroupsError: ValidationError;
     participantGroupErrors: ParticipantGroupInputErrors[];
+    roundingUnitError: ValidationError;
 } {
     return useMemo(() => {
         const totalAmountError = validatePositiveIntegerString(totalAmount, { label: "合計金額" });
@@ -31,16 +34,26 @@ export default function useSplitFormValidation(
             count: validatePositiveIntegerString(group.count, { label: "人数" })
         }));
 
+        const roundingUnitError: ValidationError = (() => {
+            if (!roundingEnabled) return null;
+            const unit = Number(roundingUnit);
+            if (!roundingUnit || roundingUnit.trim() === "") return "単位を入力してください";
+            if (isNaN(unit) || !Number.isInteger(unit) || unit < 1) return "1以上の整数を入力してください";
+            return null;
+        })();
+
         const isValid =
             !totalAmountError &&
             !participantGroupsError &&
-            participantGroupErrors.every(e => !e.weight && !e.count);
+            participantGroupErrors.every(e => !e.weight && !e.count) &&
+            !roundingUnitError;
 
         return {
             isValid,
             totalAmountError,
             participantGroupsError,
-            participantGroupErrors
+            participantGroupErrors,
+            roundingUnitError
         };
-    }, [totalAmount, participantGroups]);
+    }, [totalAmount, participantGroups, roundingUnit, roundingEnabled]);
 }
