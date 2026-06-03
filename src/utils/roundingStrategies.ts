@@ -1,3 +1,4 @@
+import RoundingOptions from "@/types/roundingOptions";
 import { RoundingStrategy } from "@/types/roundingStrategy";
 
 const normalizePosition = (position: string): string => {
@@ -49,7 +50,12 @@ export const roundToYen: RoundingStrategy = (participantGroups, totalAmount) => 
 };
 
 
-export const roundToUnit = (unit: number): RoundingStrategy => (participantGroups, totalAmount) => {
+export const roundToUnit = (unit: number, options: RoundingOptions = {}): RoundingStrategy => (participantGroups, totalAmount) => {
+    const {
+        surplusWeight = 100,
+        deviationWeight = 10,
+    } = options;
+    
     const totalWeight = participantGroups.reduce((sum, group) => {
         const weight = Number(group.weight);
         const count = Number(group.count);
@@ -152,8 +158,7 @@ export const roundToUnit = (unit: number): RoundingStrategy => (participantGroup
                     deviationScore += deviation / (group.theoreticalPerPerson || 1);
                 }
 
-                // スコア: 余剰を重視しつつ、乖離も考慮
-                const score = surplus * 100 + deviationScore * 10;
+                const score = surplus * surplusWeight + deviationScore * deviationWeight;
 
                 if (score < bestScore) {
                     bestScore = score;

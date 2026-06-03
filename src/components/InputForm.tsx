@@ -22,6 +22,7 @@ export default function InputForm({
 }: Props) {
     const [roundingEnabled, setRoundingEnabled] = useState(true);
     const [roundingUnit, setRoundingUnit] = useState("1000");
+    const [allowSurplus, setAllowSurplus] = useState(false);
     const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const {
@@ -53,7 +54,9 @@ export default function InputForm({
 
         setSubmitAttempted(false);
 
-        const strategy = roundingEnabled ? roundToUnit(Number(roundingUnit)) : roundToYen;
+        const strategy = roundingEnabled ? roundToUnit(Number(roundingUnit), {
+            surplusWeight: allowSurplus ? 0 : 100,
+        }) : roundToYen;
 
         const splitResult = calculateSplit(participantGroups, Number(totalAmount), strategy);
         setResults(splitResult.results);
@@ -123,20 +126,42 @@ export default function InputForm({
                     <AddParticipantGroupButton onClick={handleAddParticipantGroup} />
 
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <input
-                            type="checkbox"
-                            checked={roundingEnabled}
-                            onChange={(e) => setRoundingEnabled(e.target.checked)}
-                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
-                        <InputField
-                            value={roundingUnit}
-                            onChange={(value) => setRoundingUnit(value)}
-                            placeholder="例：1000"
-                            min={1}
-                            error={submitAttempted ? roundingUnitError : null}
-                        />
-                        <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
+                        <div className="flex items-center gap-3">
+                            <input
+                                id="roundingEnabled"
+                                type="checkbox"
+                                checked={roundingEnabled}
+                                onChange={(e) => setRoundingEnabled(e.target.checked)}
+                                className="w-5 h-5 flex-shrink-0 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                            />
+                            <div className="w-24 flex-shrink-0">
+                                <InputField
+                                    value={roundingUnit}
+                                    onChange={(value) => setRoundingUnit(value)}
+                                    placeholder="例：1000"
+                                    min={1}
+                                    error={submitAttempted ? roundingUnitError : null}
+                                />
+                            </div>
+                            <label htmlFor="roundingEnabled" className="text-sm font-medium text-gray-700 whitespace-nowrap cursor-pointer">
+                                円単位で計算する
+                            </label>
+                        </div>
+                    </div>
+
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <label className="flex items-center gap-3">
+                            <input
+                                type="checkbox"
+                                checked={allowSurplus}
+                                onChange={(e) => setAllowSurplus(e.target.checked)}
+                                disabled={!roundingEnabled}
+                                className="w-5 h-5 flex-shrink-0 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                            />
+                            <span className={`text-sm font-medium whitespace-nowrap ${roundingEnabled ? "text-gray-700" : "text-gray-400"}`}>
+                                余剰をある程度許容する
+                            </span>
+                        </label>
                     </div>
 
                     {submitAttempted && !isValid && !participantGroupsError ? (
