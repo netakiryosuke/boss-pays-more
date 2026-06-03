@@ -158,7 +158,6 @@ export const roundToUnit = (unit: number, options: RoundingOptions = {}): Roundi
                     deviationScore += deviation / (group.theoreticalPerPerson || 1);
                 }
 
-                // スコア: 余剰を重視しつつ、乖離も考慮
                 const score = surplus * surplusWeight + deviationScore * deviationWeight;
 
                 if (score < bestScore) {
