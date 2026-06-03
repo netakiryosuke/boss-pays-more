@@ -22,7 +22,7 @@ export default function InputForm({
 }: Props) {
     const [roundingEnabled, setRoundingEnabled] = useState(true);
     const [roundingUnit, setRoundingUnit] = useState("1000");
-    const [allowSurplus, setAllowSurplus] = useState(true);
+    const [allowSurplus, setAllowSurplus] = useState(false);
     const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const {
