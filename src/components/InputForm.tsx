@@ -122,12 +122,6 @@ export default function InputForm({
                 <div className="flex flex-col gap-4 sm:gap-6">
                     <AddParticipantGroupButton onClick={handleAddParticipantGroup} />
 
-                    {submitAttempted && !isValid && !participantGroupsError ? (
-                        <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
-                            未入力または不正な値があります。赤い項目を修正してください。
-                        </div>
-                    ) : null}
-
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                         <label className="flex items-center gap-3 cursor-pointer">
                             <input
@@ -147,7 +141,11 @@ export default function InputForm({
                         </label>
                     </div>
 
-
+                    {submitAttempted && !isValid && !participantGroupsError ? (
+                        <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
+                            未入力または不正な値があります。赤い項目を修正してください。
+                        </div>
+                    ) : null}
 
                     <CalculateButton
                         onClick={handleCalculate}

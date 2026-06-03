@@ -34,9 +34,13 @@ export default function useSplitFormValidation(
             count: validatePositiveIntegerString(group.count, { label: "人数" })
         }));
 
-        const roundingUnitError: ValidationError = roundingEnabled
-            ? "単位は半角数字で入力してください"
-            : null;
+        const roundingUnitError: ValidationError = (() => {
+            if (!roundingEnabled) return null;
+            const unit = Number(roundingUnit);
+            if (!roundingUnit || roundingUnit.trim() === "") return "単位を入力してください";
+            if (isNaN(unit) || !Number.isInteger(unit) || unit < 1) return "1以上の整数を入力してください";
+            return null;
+        })();
 
         const isValid =
             !totalAmountError &&
