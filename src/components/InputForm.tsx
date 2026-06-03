@@ -5,7 +5,7 @@ import ParticipantGroupInputGroup from "./ParticipantGroupInputGroup";
 import useParticipantGroupsForm from "@/hooks/useParticipantGroupsForm";
 import CalculateButton from "./CalculateButton";
 import calculateSplit from "@/utils/calculateSplit";
-import { roundToYen, roundTo1000Yen } from "@/utils/roundingStrategies";
+import { roundToYen, roundToUnit } from "@/utils/roundingStrategies";
 import { Result } from "@/types/result";
 import InputField from "./InputField";
 import AddParticipantGroupButton from "./AddParticipantGroupButton";
@@ -20,7 +20,8 @@ export default function InputForm({
     setResults,
     setDifference
 }: Props) {
-    const [use1000YenUnit, setUse1000YenUnit] = useState(true);
+    const [roundingEnabled, setRoundingEnabled] = useState(true);
+    const [roundingUnit, setRoundingUnit] = useState(1000);
     const [submitAttempted, setSubmitAttempted] = useState(false);
 
     const {
@@ -51,7 +52,8 @@ export default function InputForm({
 
         setSubmitAttempted(false);
 
-        const strategy = use1000YenUnit ? roundTo1000Yen : roundToYen;
+        const strategy = roundingEnabled ? roundToUnit(roundingUnit) : roundToYen;
+
         const splitResult = calculateSplit(participantGroups, Number(totalAmount), strategy);
         setResults(splitResult.results);
         setDifference(splitResult.difference);
@@ -129,13 +131,23 @@ export default function InputForm({
                         <label className="flex items-center gap-3 cursor-pointer">
                             <input
                                 type="checkbox"
-                                checked={use1000YenUnit}
-                                onChange={(e) => setUse1000YenUnit(e.target.checked)}
+                                checked={roundingEnabled}
+                                onChange={(e) => setRoundingEnabled(e.target.checked)}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                             />
-                            <span className="text-sm font-medium text-gray-700">1000円単位で計算する</span>
+                            <input
+                                type="number"
+                                value={roundingUnit}
+                                onChange={(e) => setRoundingUnit(Number(e.target.value))}
+                                min={1}
+                                step={1}
+                                className="px-4 py-2.5 border rounded-lg text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-transparent hover:border-gray-400 transition-colors duration-200 border-gray-300 focus:ring-blue-500"
+                            />
+                            <span className="text-sm font-medium text-gray-700">円単位で計算する</span>
                         </label>
                     </div>
+
+
 
                     <CalculateButton
                         onClick={handleCalculate}
